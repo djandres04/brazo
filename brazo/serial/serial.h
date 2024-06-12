@@ -12,6 +12,7 @@
 void usart_init(void);
 void usart_send(unsigned char ch);
 void usart_string(char *str);
+unsigned char usart_receive(void);
 
 
 #endif /* SERIAL_H_ */

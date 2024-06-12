@@ -10,24 +10,19 @@
 
 #include "serial/serial.h"
 #include "servo/servo.h"
-
-
-	
-
-extern uint8_t instruccion=0;
-
-ISR(USART0_RX_vect)
-{
-	instruccion = UDR0;
-}
-
+#include "adc/joystick.h"
 
 int main(void)
 {
+	unsigned char instruccion;
     usart_init();
 	servo_init();
+	adc_init();
     while (1) 
     {
+		usart_send('H');
+		adc_lecture(0);
+		servo_set_angle(pin_codo, 90);
     }
 }
 

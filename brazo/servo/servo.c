@@ -54,16 +54,16 @@ void servo_set_angle(uint8_t channel, uint8_t angle) {
 	uint8_t ocr_value = pulse_width / 10;
 
 	switch (channel) {
-		case 0:
+		case pin_base:
 		OCR0B = ocr_value;  // Timer0 (PD5)
 		break;
-		case 1:
+		case pin_codo:
 		OCR1A = pulse_width;  // Timer1 (PB1)
 		break;
-		case 2:
+		case pin_hombro:
 		OCR1B = pulse_width;  // Timer1 (PB2)
 		break;
-		case 3:
+		case pin_pinza:
 		OCR2A = ocr_value;  // Timer2 (PB3)
 		break;
 		default:

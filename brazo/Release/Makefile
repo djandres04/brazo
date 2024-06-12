@@ -34,12 +34,14 @@ LINKER_SCRIPT_DEP:=
 # Every subdirectory with source files must be described here
 SUBDIRS :=  \
 ../delay \
+../adc \
 ../servo \
 ../serial
 
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
+../adc/joystick.c \
 ../main.c \
 ../serial/serial.c \
 ../servo/servo.c
@@ -52,21 +54,25 @@ ASM_SRCS +=
 
 
 OBJS +=  \
+adc/joystick.o \
 main.o \
 serial/serial.o \
 servo/servo.o
 
 OBJS_AS_ARGS +=  \
+adc/joystick.o \
 main.o \
 serial/serial.o \
 servo/servo.o
 
 C_DEPS +=  \
+adc/joystick.d \
 main.d \
 serial/serial.d \
 servo/servo.d
 
 C_DEPS_AS_ARGS +=  \
+adc/joystick.d \
 main.d \
 serial/serial.d \
 servo/servo.d
@@ -85,6 +91,13 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+adc/joystick.o: ../adc/joystick.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DNDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Os -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -mmcu=atmega328pb -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega328pb" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
 ./main.o: .././main.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
